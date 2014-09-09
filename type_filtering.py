@@ -9,22 +9,18 @@
 import csv
 import sys
 
-# Create empty lists
-file_name = []
-typing = []
-
-# Open both input files and output file
+# Open both input file and output file
 with open(sys.argv[1], 'r') as fin:
     with open(sys.argv[2], 'w') as fout:
         
         # Specify the csv writer features and create a header row
         writer = csv.writer(fout, delimiter='\t', quotechar='', quoting=csv.QUOTE_NONE)
         headers = ('file_names',)
-        writer.writerow(headers)
+        writer.writerow(headers) # write headers to outfile
         
-        # Specify action for first input file
+        # Specify action for the input file
         for line in fin:
-            line = line.strip()
-            columns = line.split("\t")
-            if columns[2] not in ('131', '-'):
-                writer.writerow([columns[0]])
+            line = line.strip()        # split each line
+            columns = line.split("\t") # split each tab and save to columns variable
+            if columns[2] not in ('131', '-'): # if column 3 (python zero based) does not contain these strings
+                writer.writerow([columns[0]])  # write output to outfile
