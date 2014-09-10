@@ -1,7 +1,7 @@
 DNAManipulations
 ==================
 
-General Python scripts involving biopython and regular expressions modules to:
+General scripts, typically Python, Perl, R or Bash that:
 
 1) Find DNA motifs
 
