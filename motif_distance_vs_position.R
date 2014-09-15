@@ -62,5 +62,3 @@ pdf(file = "motifs_genome_MGEs.pdf",
 # 600 dpi for publication quality resolution
 motif_plot # Print the plot
 dev.off()  # Turn plot off
-
-#  panel.grid = element_blank())
