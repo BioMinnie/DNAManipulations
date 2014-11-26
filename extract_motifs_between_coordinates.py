@@ -26,8 +26,8 @@ merged = []
 # file1 is the list of motifs, coordinates and distances in whole genome
 # file2 is the list of coordinates (ie. MGEs)
 
-with open('/Users/mel/Desktop/test_GATC_motifs_distance_updated.txt', 'r') as fin1, \
-open('/Users/mel/Desktop/script_testing/list_MGEs.txt', 'r') as fin2:
+with open(sys.argv[1], 'r') as fin1, \
+open(sys.argv[2], 'r') as fin2:
         
     # Specify action for first input file
     motifs_file = csv.reader(fin1, delimiter='\t', quotechar='', quoting=csv.QUOTE_NONE)
@@ -67,4 +67,4 @@ def write_to_csv(fout, items_to_write):
         writer.writerow([item]) # Write each item of list or array
 
 #Write output
-write_to_csv('/Users/mel/Desktop/motifs_inMGEs_only.txt', merged)
+write_to_csv(sys.argv[3], merged)
