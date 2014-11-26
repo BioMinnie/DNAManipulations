@@ -18,7 +18,7 @@ motif_counts = []
 # fout is  csv file of the output
 with open(sys.argv[1], 'r') as fin1, \
 open(sys.argv[2], 'r') as fin2:
-    with open('/Users/mel/Desktop/counts_motif_genome_womge.txt', 'w') as fout:
+    with open(sys.argv[3], 'w') as fout:
         
         # Specify the csv writer features and create a header row
         writer = csv.writer(fout, delimiter='\t', quotechar='', quoting=csv.QUOTE_NONE)
