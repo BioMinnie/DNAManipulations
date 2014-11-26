@@ -12,6 +12,7 @@ offset1 = 1 # As python is zero based - update coordinates
 with open(sys.argv[1],'r') as fin1: # Open infile
     with open(sys.argv[2], 'w') as fout: # Open outfile
         writer = csv.writer(fout, delimiter='\t', quotechar='', quoting=csv.QUOTE_NONE)
+        # Change headers to whatever headings you require for each column
         headers = ('motif', 'updated_start', 'end', 'updated_distance')
         writer.writerow(headers)        # Write headers
         file_headers = fin1.readline()  # Reads and ignores the header line 
