@@ -1,9 +1,6 @@
 # Import library
 library(ggplot2)
 
-# Set working directory - change this accordingly
-setwd("/Users/Mel/Documents/uni/projects/summer_project_methylome/EC958_methylome/stats/scripts")
-
 # Read in the data
 # motif, start position, end position, distance, region in genome
 motif_reg = read.csv(file.choose(), header=T, sep='\t')
@@ -29,8 +26,8 @@ plot(position, distance)
 # ggplot2 scatterplot in colour:
 # Using my own colours
 motif_plot <- ggplot(motif_reg, aes(start, distance, color=factor(region))) + # Colour according to region
-  xlab("Position in EC958 (bp)") +                                            # X label
-  ylab("Distance between GATC motifs (bp)") +                                 # Y label
+  xlab("Position in genome (bp)") +                                            # X label
+  ylab("Distance between motifs (bp)") +                                 # Y label
   geom_point() + scale_color_manual(values=c("#0033CC", "#BABABA", "#00CC00", "#FF0000", "#FF9933", "#9900FF", "#FF99CC",
                                              "#0099FF", "#EE03A8", "#003300", "#993300", "#006666", "#66CCFF", "#660066"), 
                                              # Added the colours for each region (genome is grey)
@@ -53,7 +50,8 @@ motif_plot <- ggplot(motif_reg, aes(start, distance, color=factor(region))) + # 
 motif_plot
 
 # Save the file as a PDF
-pdf(file = "motifs_genome_MGEs.pdf",
+# This can be altered to any image file type
+pdf(file = "filename.pdf",
     width = 12, 
     height = 8, 
     pointsize = 12, 
