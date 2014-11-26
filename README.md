@@ -1,14 +1,22 @@
 DNAManipulations
 ==================
 
-General scripts, typically Python, Perl, R or Bash that:
+General scripts. Typically Python, Perl, R or Bash.
 
-1) Find DNA motifs
+Types of manipulations:
 
-2) Extract distances between motifs
+1) Find DNA motifs or genomic regions
 
-3) Type filtering
+2) Extract distances between motifs or genomic regions
 
-4) Count motifs within coordinates
+3) String filtering
 
-5) Filter file based on size of integer in designated columns
+4) Count motifs or genomic regions within coordinates
+
+5) Perform statistical analyses on data
+
+6) Convert between different filetypes, usually genomic datatypes
+
+7) Circularise *de novo* assembled genomes
+
+8) Plot publication quality graphs
