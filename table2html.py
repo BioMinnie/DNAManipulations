@@ -67,9 +67,10 @@ with open(sys.argv[1], 'r') as fin:       # Open the infile (typically tab delim
           	    htmltxt += '</TABLE>\n'
           	    return htmltxt
 
-        # Generate the html variable by building a html table from the dictionary of Function 2, using basic html tags	
+        # Generate the html variable by building a html table from the dictionary of Function 2, using basic html tags
+        # Change summary="Table Heading" to whatever title you'd like for the table
       	htmltxt = csv2htmlextra(rawdata, True,
-      				dict(TABLE=' cellspacing="0", cellpadding="5", summary="Methylation data table"',
+      				dict(TABLE=' cellspacing="0", cellpadding="5", summary="Table Heading"',
       		                     THEAD=' style="text-align: center; font-weight: bold; border: 1px solid #000; background-color: lightgrey;"',
       		                     TBODY='' 
       		                     )
