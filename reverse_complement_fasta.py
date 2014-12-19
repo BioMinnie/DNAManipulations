@@ -1,10 +1,22 @@
+#######################################################################################################
+#                                                                                                     #
+## AUTHOR: Melinda M Ashcroft                                                                         #
+## AFFILIATION: Beatson Lab | SCMB - University of Queensland                                         #
+#                                                                                                     #
+## PURPOSE: Reverse complement a fasta sequence							      #
+## Date: 19 December 2014                                                                            #
+#                                                                                                     #
+
+#######################################################################################################
+
+# Import modules
 from Bio.Seq import Seq
 from Bio.Alphabet import generic_nucleotide
 from Bio.Alphabet import IUPAC
 from Bio.SeqRecord import SeqRecord
 from Bio import SeqIO
 import sys
- 
+
 with open(sys.argv[1], 'r') as fin: # Open the infile (fasta)
     with open(sys.argv[2], 'w') as fout: # Create and open the outfile (fasta)
 	# To open a file format other than fasta, change "fasta"
