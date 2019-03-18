@@ -1,0 +1,57 @@
+#Various Bioinformatics One-Liners
+
+#Mapping reads to a reference using BWA and Samtools
+bwa index {FILE}.fasta
+bwa mem {FILE}.fasta {FILE}_R1.fq {FILE}_R2.fq > {FILE}.sam 
+samtools view -bS {FILE}.sam > {FILE}.bam 
+samtools sort {FILE}.bam -o {FILE}.sorted.bam 
+samtools index {FILE}.sorted.bam
+
+#Pilon
+java -Xmx16G -jar pilon-1.21.jar --genome {FILE}.fasta --frags {FILE}.sorted.bam \
+--output corrected --vcf --changes --threads 16 --verbose --minmq 60 --minqual 10 \
+--fix indels
+
+#Using Python 2.7+
+#Drop an entire column in a pandas dataframe if 
+#any string in column contains an N
+df.drop([col for col, val in df.iteritems() if val.values.any() == 'N'], axis=1, 
+inplace=True)
+
+#Print contig name and length of contig
+cat {FILE}.fasta  | awk '$0 ~ ">" {print c; c=0;printf substr($0,2,100) "\t"; } \
+$0 !~ ">" {c+=length($0);} END { print c; }'
+
+#Use Nesoni to map reads to a reference
+#Mapping to reference first (do this for all strains - can make a bash script):
+nesoni --make-cores 16 analyse-sample ${FILE} ${PATH_TO_RAW_ILLUMINA}/${FILE}.gbk \
+clip: none align: bowtie pairs: ${PATH_TO_RAW_ILLUMINA}/${FILE}_trimmed_1.fq.gz \
+${PATH_TO_RAW_ILLUMINA}/${FILE}_trimmed_2.fq.gz
+
+#Use Nesoni to generate an NWAY - core genome SNPs
+#Generate the nway ("--require-all yes" will give you core SNPs):
+nesoni nway --output ${FILE}-nway-SNPs_INDELS.all.ref --reference yes --require-all yes \
+${PATH_TO_NESONI_DIRECTORIES}/${NESONI_DIRECTORY} 
+${PATH_TO_NESONI_DIRECTORIES}/${NESONI_DIRECTORY}
+${PATH_TO_NESONI_DIRECTORIES}/${NESONI_DIRECTORIE} <....etc>
+
+#Use parSNP to generate core genome SNP MSA
+#make sure to use the -c flag as this uses all genomes in the directory & ignores MUMi
+parsnp -c -d ${PATH_TO_ASSEMBLIES} -p 16 ${PATH_TO_REFERENCE}/REFERENCE.gbk \
+-o ${PATH_TO_OUTPUT_DIRECTORY}
+
+#Convert XMFA to MFA
+harvesttools -x {FILE}.xmfa -M {FILE}.mfa
+
+#USE snippy to call SNPs against a reference
+snippy --reference ${PATH_TO_REFERENCE}/REFERENCE.fasta --outdir ${PATH_TO_OUT_DIRECTORY} \
+--pe1 ${PATH_TO_READS}/{FILE}_R1.fq --pe2 ${PATH_TO_READS}/{FILE}_R2.fq --prefix ABCDE --force
+
+#Use Gubbins to remove recombination from a MSA
+run_gubbins.py -r GTRGAMMA --threads 16 ${File}.mfa
+
+#Using Prokka to annotate bacterial genomes
+prokka --outdir ${PATH_TO_OUTPUT_DIRECTORY} --locustag ABCDE --prefix ABCDE \
+--proteins ${PATH_TO_DATABASES}/DATABASE_01 --genus ABCDE --strain ABCDE \
+--plasmid pABCDE --kingdom Bacteria --gcode 11 --rfam --force --addgenes \
+${FILE_TO_ANNOTATE}.fasta
